@@ -16,13 +16,13 @@ function createFileStore() {
 	return {
 		subscribe,
 
-		/** Загружает содержимое папки */
+		/* Загружает содержимое папки */
 		async load(path: string = '/') {
 			const files = await fileService.loadFiles(path);
 			set({ files, currentPath: path });
 		},
 
-		/** Загружает файл в текущую папку */
+		/* Загружает файл в текущую папку */
 		async upload(file: File) {
 			const state = get({ subscribe });
 			const path = state.currentPath || '/';
@@ -31,7 +31,7 @@ function createFileStore() {
 			await this.load(path);
 		},
 
-		/** Создаёт новую папку в текущей директории */
+		/* Создаёт новую папку в текущей директории */
 		async createFolder(folderName: string) {
 			const state = get({ subscribe });
 			const path = state.currentPath || '/';
@@ -40,7 +40,7 @@ function createFileStore() {
 			await this.load(path);
 		},
 
-		/** Удаляет файл или папку */
+		/* Удаляет файл или папку */
 		async delete(name: string) {
 			const state = get({ subscribe });
 			const path = state.currentPath || '/';
@@ -49,7 +49,7 @@ function createFileStore() {
 			await this.load(path);
 		},
 
-		/** Скачивает файл */
+		/* Скачивает файл */
 		async download(name: string) {
 			const state = get({ subscribe });
 			const path = state.currentPath || '/';
@@ -57,7 +57,7 @@ function createFileStore() {
 			await fileService.downloadFile(name, path);
 		},
 
-		/** Переименовывает файл или папку */
+		/* Переименовывает файл или папку */
 		async rename(oldName: string, newName: string) {
 			const state = get({ subscribe });
 			const path = state.currentPath || '/';
@@ -66,18 +66,18 @@ function createFileStore() {
 			await this.load(path);
 		},
 
-		/** Получить текущий путь синхронно */
+		/* Получить текущий путь синхронно */
 		getCurrentPath(): string {
 			const state = get({ subscribe });
 			return state.currentPath || '/';
 		},
 
-		/** Перейти в указанную папку */
+		/* Перейти в указанную папку */
 		async goTo(path: string) {
 			await this.load(path);
 		},
 
-		/** Перейти вверх по папкам */
+		/* Перейти вверх по папкам */
 		async goUp() {
 			const state = get({ subscribe });
 			const parts = state.currentPath.split('/').filter(Boolean);

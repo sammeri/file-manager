@@ -25,7 +25,7 @@ COPY --from=builder /app/static ./static
 COPY --from=builder /app/vite.config.ts ./vite.config.ts
 COPY --from=builder /app/src ./src
 
-# Копируем папку uploads
+# /uploads
 COPY --from=builder /app/uploads ./uploads
 
 EXPOSE 5173
